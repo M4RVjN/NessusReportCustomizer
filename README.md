@@ -7,8 +7,6 @@
 
 一個強大且易於使用的桌面應用程式，旨在將繁瑣的 Nessus XML 弱點報告，快速轉換為格式精美、內容客製化的 Excel 檔案。專為提升資安分析師與專案管理人員的工作效率而設計。
 
-![應用程式示意圖](https://placehold.co/800x450/cde4ff/6699ff?text=Application%20Screenshot)
-
 ---
 
 ## **目錄**
