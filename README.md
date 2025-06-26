@@ -5,9 +5,11 @@
 ![授權](https://img.shields.io/badge/license-MIT-lightgrey)
 ![建置狀態](https://img.shields.io/badge/build-passing-success)
 
+![使用者介面](./assets/UI.png)
+
 一個強大且易於使用的桌面應用程式，旨在將繁瑣的 Nessus XML 弱點報告，快速轉換為格式精美、內容客製化的 Excel 檔案。專為提升資安分析師與專案管理人員的工作效率而設計。
 
-![使用者介面](./assets/UI.png)
+備註：開發時使用的 Nessus 版本為 10.8.4
 
 ---
 
