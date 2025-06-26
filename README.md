@@ -1,4 +1,4 @@
-# Nessus 報告客製化系統 (Nessus Report Customizer)
+# Nessus 報告客製化系統
 
 ![版本](https://img.shields.io/badge/version-1.0.0-blue)
 ![Python 版本](https://img.shields.io/badge/python-3.8+-brightgreen)
@@ -43,8 +43,6 @@
 
 ## **3. 安裝指南**
 
-**目標受眾：** 最終使用者、開發人員
-
 ### **先決條件**
 
 * Python 3.8 或更高版本
@@ -54,11 +52,11 @@
 
 1.  **複製本倉庫**
     ```bash
-    git clone [https://github.com/your-username/your-repository-name.git](https://github.com/your-username/your-repository-name.git)
+    git clone [https://github.com/M4RVjN/NessusReportCustomizer.git](https://github.com/M4RVjN/NessusReportCustomizer.git)
     cd your-repository-name
     ```
 
-2.  **建立並啟動虛擬環境 (強烈建議)**
+2.  **建立虛擬環境 (強烈建議)**
     ```bash
     # 建立虛擬環境
     python -m venv .venv
@@ -75,41 +73,35 @@
     ```bash
     pip install -r requirements.txt
     ```
-
-4.  **(可選，供開發者使用) 安裝可編輯模式**
-    這將讓您對原始碼的修改立即生效，並解決所有導入路徑問題。
-    ```bash
-    pip install -e .
-    ```
-
 ---
 
 ## **4. 使用範例**
-
-**目標受眾：** 最終使用者
 
 1.  **執行程式**
     在專案根目錄下，執行主程式：
     ```bash
     python main.py
     ```
-2.  **選擇來源資料夾**
-    點擊「📁 選擇資料夾」按鈕，並選擇一個存放了您的 `.nessus` 檔案的資料夾。
+    此處也可使用 pyinstaller 進行打包( 位於檔案根目錄下 )：
+    ```bash
+    pyinstaller --name "NessusTool" --onefile --windowed --add-data "config.yaml;." --icon="resources/icons/IE.ico" main.py
+    ```
+    完成後直接使用 .exe 執行
+3.  **選擇來源資料夾**
+    點擊「選擇資料夾」按鈕，並選擇一個存放了您的 `.nessus` 檔案的資料夾。
 
-3.  **勾選所需欄位**
+4.  **勾選所需欄位**
     在中間的滾動區域，勾選所有您希望出現在 Excel 報告中的欄位。
 
-4.  **生成報告**
-    點擊「🚀 一鍵生成 Excel 報告！」按鈕，選擇報告的儲存位置和檔名。
+5.  **生成報告**
+    點擊「一鍵生成 Excel 報告！」按鈕，選擇報告的儲存位置和檔名。
 
-5.  **完成**
+6.  **完成**
     下方的進度條將顯示處理進度。完成後，程式會彈出成功提示視窗。
 
 ---
 
 ## **5. 組態選項**
-
-**目標受眾：** 進階使用者、開發人員
 
 本系統的核心是 `config.yaml`，它定義了所有可選欄位的解析規則。
 
@@ -119,62 +111,9 @@
 
 | 鍵 (Key)      | 型別      | 是否必要 | 說明                                                              |
 | :------------ | :-------- | :------- | :---------------------------------------------------------------- |
-| `id`          | `string`  | **是** | 欄位的唯一內部識別碼，必須是英文且不重複。                         |
-| `displayName` | `string`  | **是** | 顯示在 UI 和 Excel 標頭上的名稱。                                 |
-| `path`        | `string`  | **是** | 用於提取資料的 XPath 路徑。`@` 表示屬性，`/text()` 表示文字。     |
-| `source_tag`  | `string`  | **是** | XPath 的查詢起點，通常是 `ReportItem` 或 `ReportHost`。           |
+| `id`          | `string`  | 是       | 欄位的唯一內部識別碼，必須是英文且不重複。                         |
+| `displayName` | `string`  | 是       | 顯示在 UI 和 Excel 標頭上的名稱。                                 |
+| `path`        | `string`  | 是       | 用於提取資料的 XPath 路徑。`@` 表示屬性，`/text()` 表示文字。     |
+| `source_tag`  | `string`  | 是       | XPath 的查詢起點，通常是 `ReportItem` 或 `ReportHost`。           |
 | `default`     | `boolean` | 否       | 若為 `true`，此欄位在 UI 啟動時會預設被勾選。                     |
 | `mapping`     | `object`  | 否       | 一個鍵值對應表，用於將原始值（如數字 `4`）轉換為文字（如 `Critical`）。 |
-
----
-
-## **6. 貢獻指南**
-
-**目標受眾：** 開發人員
-
-我們非常歡迎各種形式的貢獻！無論是回報問題、提出建議，還是提交程式碼。
-
-### **回報問題 (Bug Reports)**
-如果您發現了任何問題，請在 GitHub 的 "Issues" 頁面中建立一個新的 issue，並請盡可能提供以下資訊：
-* 您的作業系統與 Python 版本。
-* 重現問題的詳細步驟。
-* 相關的錯誤訊息或截圖。
-
-### **提交程式碼 (Pull Requests)**
-1.  **Fork** 本倉庫。
-2.  建立一個新的分支 (`git checkout -b feature/AmazingFeature`)。
-3.  進行您的修改。
-4.  提交您的變更 (`git commit -m 'Add some AmazingFeature'`)。
-5.  將分支推送到您的倉庫 (`git push origin feature/AmazingFeature`)。
-6.  開啟一個 **Pull Request**。
-
-**最佳實踐：** 在提交 Pull Request 前，請確保您的程式碼遵循專案現有的風格，並已通過所有測試（如果專案包含測試的話）。
-
----
-
-## **7. 疑難排解**
-
-* **問題：`ImportError` 或 `ModuleNotFoundError`**
-    * **解決方案：** 確保您已啟動虛擬環境，並且是從**專案根目錄**執行程式。執行 `pip install -e .` 可以一勞永逸地解決此問題。
-
-* **問題：`ConfigNotFoundError`**
-    * **解決方案：** 確認 `config.yaml` 檔案確實存在於您執行程式的目錄（專案根目錄），並檢查檔名是否拼寫正確。
-
-* **問題：`PermissionError: [Errno 13] Permission denied`**
-    * **解決方案：** 您要儲存的目標 Excel 檔案目前正被其他程式（如 Microsoft Excel）打開。請關閉對應的 Excel 檔案後再試。
-
----
-
-## **8. 常見問題 (FAQ)**
-
-* **Q: 我可以新增一個需要用正則表達式處理的欄位嗎？**
-    * **A:** 不建議直接在 `config.yaml` 中實現。最佳實踐是在 `AppController` 中進行「後處理」：先用 `config.yaml` 提取原始文字塊，然後在 `_run_batch_task` 方法中，對 `BatchProcessor` 回傳的 DataFrame 使用 Pandas 的 `.apply()` 方法和您的正則表達式函式來建立一個新欄位。
-
-* **Q: 這個工具支援其他掃描器的報告嗎？**
-    * **A:** 目前不支援。但由於採用了設定檔驅動的通用解析器，未來可以透過提供對應的 `config.yaml` 和微調 `Parser` 來擴充支援。
-
----
-
-## **9. 授權資訊**
-
-本專案採用 **MIT License** 授權。詳情請見 `LICENSE` 檔案。
