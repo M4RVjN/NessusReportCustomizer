@@ -1,0 +1,149 @@
+# =================================================================
+# Nessus 報告客製化系統 - 欄位設定檔
+# 根據您舊有的 Python 腳本自動生成
+# =================================================================
+
+fields:
+  # --- 從 <ReportHost> 層級提取的資訊 ---
+  - id: 'host_ip'
+    displayName: 'IP'
+    path: './@name'
+    source_tag: 'ReportHost'
+    default: true
+    description: '掃描目標的主機 IP 或 FQDN。對應舊腳本中的 host_ip。'
+
+  - id: 'netbios_name'
+    displayName: 'NetBIOS 名稱'
+    path: "./HostProperties/tag[@name='netbios-name']/text()"
+    source_tag: 'ReportHost'
+    default: false
+    description: '主機的 NetBIOS 名稱。'
+
+  - id: 'hostname'
+    displayName: '主機名稱'
+    path: "./HostProperties/tag[@name='hostname']/text()"
+    source_tag: 'ReportHost'
+    default: false
+    description: '透過 DNS 或其他方式解析出的主機名稱。'
+  
+  - id: 'os_name'
+    displayName: '作業系統'
+    path: "./HostProperties/tag[@name='operating-system']/text()"
+    source_tag: 'ReportHost'
+    default: true
+    description: '偵測到的作業系統詳細名稱。'
+
+  - id: 'os_type'
+    displayName: '主機類型'
+    path: "./HostProperties/tag[@name='os']/text()"
+    source_tag: 'ReportHost'
+    default: false
+    description: '偵測到的主機作業系統類型（如: Windows, Linux）。'
+
+  # --- 從 <ReportItem> 層級提取的資訊 ---
+  - id: 'protocol'
+    displayName: 'PROTOCOL'
+    path: './@protocol'
+    source_tag: 'ReportItem'
+    default: true
+
+  - id: 'port'
+    displayName: 'PORTNAME'
+    path: './@port'
+    source_tag: 'ReportItem'
+    default: true
+
+  - id: 'plugin_id'
+    displayName: '弱點編號'
+    path: './@pluginID'
+    source_tag: 'ReportItem'
+    default: true
+
+  - id: 'plugin_name'
+    displayName: '弱點名稱'
+    path: './@pluginName'
+    source_tag: 'ReportItem'
+    default: true
+
+  - id: 'severity'
+    displayName: '風險等級'
+    path: './@severity'
+    source_tag: 'ReportItem'
+    default: true
+    description: '弱點的風險等級，使用 mapping 進行轉換。'
+    mapping:
+      '4': 'Critical'
+      '3': 'High'
+      '2': 'Medium'
+      '1': 'Low'
+      '0': 'Info'
+
+  - id: 'description'
+    displayName: '弱點描述(英文)'
+    path: './description/text()'
+    source_tag: 'ReportItem'
+    default: true
+
+  - id: 'solution'
+    displayName: '修補建議(英文)'
+    path: './solution/text()'
+    source_tag: 'ReportItem'
+    default: true
+    
+  - id: 'cve_id'
+    displayName: 'CVE ID'
+    path: './cve/text()'
+    source_tag: 'ReportItem'
+    default: true
+    description: '關聯的 CVE 編號。一個弱點可能有多個 CVE，此處只提取第一個。'
+
+  - id: 'plugin_family'
+    displayName: '弱點類型'
+    path: './@pluginFamily'
+    source_tag: 'ReportItem'
+    default: false
+    
+  - id: 'cvss3_score'
+    displayName: 'CVSSv3 分數'
+    path: './cvss3_base_score/text()'
+    source_tag: 'ReportItem'
+    default: false
+
+  - id: 'cvss2_score'
+    displayName: 'CVSSv2 分數'
+    path: './cvss_base_score/text()'
+    source_tag: 'ReportItem'
+    default: false
+
+  - id: 'exploit_available'
+    displayName: 'Exploit'
+    path: './exploit_available/text()'
+    source_tag: 'ReportItem'
+    default: false
+    description: '是否有可用的攻擊程式。值通常為 "true" 或 "false"。'
+
+  - id: 'plugin_publication_date'
+    displayName: '弱點發布日'
+    path: './plugin_publication_date/text()'
+    source_tag: 'ReportItem'
+    default: false
+
+  - id: 'plugin_modification_date'
+    displayName: '弱點更新日'
+    path: './plugin_modification_date/text()'
+    source_tag: 'ReportItem'
+    default: false
+
+  - id: 'see_also'
+    displayName: 'See Also'
+    path: './see_also/text()'
+    source_tag: 'ReportItem'
+    default: false
+    description: '相關參考連結，多個連結會被合併成一個字串。'
+
+  - id: 'plugin_output'
+    displayName: '佐證資訊'
+    path: './plugin_output/text()'
+    source_tag: 'ReportItem'
+    default: true
+    description: '插件的原始輸出，用於後續的特殊處理。'
