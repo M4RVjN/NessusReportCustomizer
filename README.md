@@ -1,4 +1,4 @@
-# Nessus 報告客製化系統
+# Nessus 報告客製化軟體
 
 ![版本](https://img.shields.io/badge/version-1.0.0-blue)
 ![Python 版本](https://img.shields.io/badge/python-3.8+-brightgreen)
