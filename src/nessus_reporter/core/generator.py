@@ -85,32 +85,3 @@ class ExcelReportGenerator:
             raise ReportGenerationError(f"無法寫入檔案，請確認 '{output_path.name}' 沒有被其他程式打開。")
         except Exception as e:
             raise ReportGenerationError(f"生成報告時發生未預期的錯誤: {e}") from e
-
-# --- 使用範例 (保持不變) ---
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-    try:
-        print("正在建立範例 DataFrame...")
-        sample_data = {
-            '主機 IP': ['192.168.1.1', '192.168.1.2', '192.168.1.1'],
-            '弱點名稱': ['SSL Certificate Expired', 'Apache Version Outdated', 'Cross-site Scripting'],
-            '風險等級': ['高 (High)', '中 (Medium)', '高 (High)'],
-            '端口': [443, 80, 443],
-            '修補建議': [
-                'Please renew the SSL certificate immediately.', 
-                'Upgrade Apache to the latest stable version.',
-                'Sanitize user input to prevent XSS attacks.'
-            ]
-        }
-        test_df = pd.DataFrame(sample_data)
-        user_selected_columns = ['主機 IP', '風險等級', '弱點名稱', '修補建議']
-        output_dir = Path("output_test")
-        output_dir.mkdir(exist_ok=True)
-        report_path = output_dir / "Formatted_Nessus_Report.xlsx"
-        print(f"準備生成報告至: {report_path}")
-        
-        ExcelReportGenerator.generate_report(test_df, user_selected_columns, report_path)
-        
-        print(f"\n報告生成成功！請打開檔案查看格式化效果: {report_path.resolve()}")
-    except ReportGenerationError as e:
-        print(f"\n[錯誤] {e}")
