@@ -62,6 +62,9 @@
     # 建立虛擬環境
     python -m venv .venv
 
+    #建立虛擬環境(建議使用 3.12.1 版本)
+     py -3.12 -m venv .venv
+
     # 啟動虛擬環境 (Windows)
     .\.venv\Scripts\activate
 
