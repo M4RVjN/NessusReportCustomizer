@@ -99,7 +99,17 @@ class AppController:
         try:
             # 步驟一：【先】載入設定檔。
             # 【修改】使用 resource_path() 來找到 config.yaml
-            config_file_path = resource_path('config.yaml')
+            if getattr(sys, 'frozen', False):
+                # 如果是打包後的 .exe，基礎路徑就是 .exe 所在的資料夾
+                base_path = Path(sys.executable).parent
+            else:
+                # 如果是在開發環境中執行 .py，基礎路徑就是專案根目錄
+                # 這裡我們假設 app_controller.py 在 src/nessus_reporter/ 中
+                base_path = Path(__file__).resolve().parents[2]
+
+            config_file_path = base_path / 'config.yaml'
+            
+            logging.info(f"正在從以下路徑載入設定檔: {config_file_path}")
             self.config_manager = ConfigurationManager.from_file(config_file_path)
             self.fields_config = self.config_manager.get_all_fields()
 
