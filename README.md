@@ -76,6 +76,17 @@
     ```bash
     pip install -r requirements.txt
     ```
+
+### **EXE打包方法**
+
+    ```bash
+    # 安裝 pyinstaller
+    pip install pyinstaller==6.14.1
+
+    # 執行設定檔
+    pyinstaller NessusTool-Marvin.spec
+    ```
+
 ---
 
 ## **4. 使用範例**
