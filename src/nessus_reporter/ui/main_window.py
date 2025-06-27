@@ -4,6 +4,21 @@ import customtkinter as ctk
 from tkinter import filedialog, messagebox
 from pathlib import Path
 from typing import List, Optional, Dict
+import sys  # resource_path 導入 sys
+
+def resource_path(relative_path: str) -> Path:
+    """
+    獲取資源檔案的絕對路徑。
+    在開發環境和 PyInstaller 打包後的環境中都能正常運作。
+    """
+    try:
+        # PyInstaller 建立一個臨時資料夾，並將路徑儲存在 _MEIPASS 中
+        base_path = Path(sys._MEIPASS)
+    except Exception:
+        # 開發環境中，sys._MEIPASS 不存在，我們會使用目前的檔案路徑
+        base_path = Path(".").resolve()
+    
+    return base_path / relative_path
 
 # 導入我們的抽象基礎類別和控制器
 from ..app_controller import AppController, IView
@@ -20,7 +35,14 @@ class MainWindow(ctk.CTk, IView):
 
         # --- 視窗基本設定 ---
         self.title("Nessus 報告客製化工具")
-        self.iconbitmap("resources/icons/IE.ico")
+
+        try:
+            icon_path = resource_path("resources/icons/IE.ico")
+            self.iconbitmap(icon_path)
+        except Exception as e:
+            # 如果圖示載入失敗，只在終端機印出警告，不讓程式崩潰
+            print(f"警告：無法載入圖示檔案 {icon_path}。錯誤: {e}")
+
         self.geometry("600x700")
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(2, weight=1) # 允許滾動區域擴展
