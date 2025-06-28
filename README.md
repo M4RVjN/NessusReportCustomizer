@@ -91,7 +91,7 @@
     pip install pyinstaller==6.14.1
     pyinstaller NessusTool-Marvin.spec
     ```
-    完成後直接使用 .exe 執行
+    接著複製一份 config.yaml 與執行檔放置於同層目錄中，即可直接使用 .exe 執行
 3.  **選擇來源資料夾**
     點擊「選擇資料夾」按鈕，並選擇一個存放了您的 `.nessus` 檔案的資料夾。
 
