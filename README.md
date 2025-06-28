@@ -77,16 +77,6 @@
     pip install -r requirements.txt
     ```
 
-### **EXE打包方法**
-
-    ```bash
-    # 安裝 pyinstaller
-    pip install pyinstaller==6.14.1
-
-    # 執行設定檔
-    pyinstaller NessusTool-Marvin.spec
-    ```
-
 ---
 
 ## **4. 使用範例**
@@ -98,7 +88,7 @@
     ```
     此處也可使用 pyinstaller 進行打包( 位於檔案根目錄下 )：
     ```bash
-    pyinstaller --name "NessusTool" --onefile --windowed --add-data "config.yaml;." --icon="resources/icons/IE.ico" main.py
+    pyinstaller NessusTool-Marvin.spec
     ```
     完成後直接使用 .exe 執行
 3.  **選擇來源資料夾**
