@@ -37,11 +37,13 @@ class MainWindow(ctk.CTk, IView):
         self.title("Nessus 報告客製化工具")
 
         try:
-            icon_path = resource_path("resources/icons/IE.ico")
-            self.iconbitmap(icon_path)
+            icon_path = resource_path("IE.ico")
+            if icon_path.is_file():
+                self.iconbitmap(icon_path)
+            else:
+                print(f"警告：在打包資源中找不到圖示檔案")
         except Exception as e:
-            # 如果圖示載入失敗，只在終端機印出警告，不讓程式崩潰
-            print(f"警告：無法載入圖示檔案 {icon_path}。錯誤: {e}")
+            print(f"警告：無法載入圖示檔案。錯誤: {e}")
 
         self.geometry("600x700")
         self.grid_columnconfigure(0, weight=1)
