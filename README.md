@@ -88,6 +88,7 @@
     ```
     此處也可使用 pyinstaller 進行打包( 位於檔案根目錄下 )：
     ```bash
+    pip install pyinstaller==6.14.1
     pyinstaller NessusTool-Marvin.spec
     ```
     完成後直接使用 .exe 執行
